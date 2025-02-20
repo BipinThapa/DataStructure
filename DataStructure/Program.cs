@@ -54,6 +54,7 @@
         }
         #endregion
 
+        #region Remove Element at Last
         public int removeLastNode()
         {
             if (isEmpty())
@@ -75,6 +76,28 @@
             size = size - 1;
             return e;
         }
+        #endregion
+        #region Remove Element at any position
+        public int RemoveAnyNode(int position)
+        {
+            if (position <= 0 || position >= size -1)
+            {
+                Console.WriteLine("Invalid Position");
+                return -1;
+            }
+            Node p = head;
+            int i = 1;
+            while (i < position - 1)
+            {
+                p = p.next;
+                i = i + 1;
+            }
+            int e = p.next.element;
+            p.next = p.next.next;
+            size = size - 1;
+            return e;
+        }
+        #endregion
 
         #region Insert Element at any position
         public void AddAny(int e, int position)
@@ -174,6 +197,11 @@
             //remove at last element
             int element1 = l.removeLastNode();
             Console.WriteLine("Removed Element:" + element1);
+            l.display();
+            Console.WriteLine("Size:" + l.length());
+            //remove at any element
+            int element2 = l.RemoveAnyNode(3);
+            Console.WriteLine("Removed Element:" + element2);
             l.display();
             Console.WriteLine("Size:" + l.length());
             Console.ReadKey();
