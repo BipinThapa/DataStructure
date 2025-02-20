@@ -158,7 +158,7 @@ namespace LearnDSAlgorithm
         }
         #endregion
 
-        #region Search Element
+        #region Search Element of linked list
         public int search(int key)
         {
             Node p = head;
@@ -175,6 +175,39 @@ namespace LearnDSAlgorithm
             return -1;
         }
         #endregion
+
+        #region Insert Element at sorted order
+        public void insertSorted(int e)
+        {
+            Node newest = new Node(e, null);
+            if (isEmpty())
+            {
+                head = newest;
+            }
+            else
+            {
+                Node p = head;
+                Node q = head;
+                while (p!=null && p.element < e)
+                {
+                    q = p;
+                    p = p.next;
+                }
+                if (p==head)
+                {
+                    newest.next = head;
+                    head = newest;
+                }
+                else
+                {
+                    newest.next = q.next;
+                    q.next = newest;
+                }
+            }
+            size = size + 1;
+        }
+        #endregion
+
         public void display()
         {
             Node p = head;
@@ -227,6 +260,12 @@ namespace LearnDSAlgorithm
             //search element
             int position = l.search(12);
             Console.WriteLine("Result:" + position);
+            //rem element at sorted method
+            l.insertSorted(7);
+            l.insertSorted(17);
+            l.insertSorted(78);
+            l.display();
+            Console.WriteLine("Size:" + l.length());
             Console.ReadKey();
         }
     }
