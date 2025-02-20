@@ -1,4 +1,6 @@
-﻿namespace LearnDSAlgorithm
+﻿using System.ComponentModel;
+
+namespace LearnDSAlgorithm
 {
     //Lab Creating and Displaying Linked List
     public class Node
@@ -154,7 +156,25 @@
             }
             size = size + 1;
         }
-        #endregion 
+        #endregion
+
+        #region Search Element
+        public int search(int key)
+        {
+            Node p = head;
+           int index = 0;
+            while (p!=null)
+            {
+                if (p.element==key)
+                {
+                    return index;
+                }
+                p = p.next;
+                index = index + 1;
+            }
+            return -1;
+        }
+        #endregion
         public void display()
         {
             Node p = head;
@@ -204,6 +224,9 @@
             Console.WriteLine("Removed Element:" + element2);
             l.display();
             Console.WriteLine("Size:" + l.length());
+            //search element
+            int position = l.search(12);
+            Console.WriteLine("Result:" + position);
             Console.ReadKey();
         }
     }
