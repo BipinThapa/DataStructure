@@ -221,6 +221,7 @@ namespace LearnDSAlgorithm
         public static void Main()
         {
             LinkedList l = new LinkedList();
+            //insert element at last
             l.addLast(7);
             l.addLast(4);
             l.addLast(12);
@@ -230,12 +231,14 @@ namespace LearnDSAlgorithm
             l.addLast(3);
             l.display();
             Console.WriteLine("Size:" + l.length());
+            //insert element at first
             l.addFirst(15);
             l.display();
             Console.WriteLine("Size:" + l.length());
             l.addFirst(25);
             l.display();
             Console.WriteLine("Size:" + l.length());
+            //insert element at anywhere
             l.AddAny(20, 3);
             l.display();
             Console.WriteLine("Size:" + l.length());
@@ -260,7 +263,7 @@ namespace LearnDSAlgorithm
             //search element
             int position = l.search(12);
             Console.WriteLine("Result:" + position);
-            //rem element at sorted method
+            //insert element at sorted method
             l.insertSorted(7);
             l.insertSorted(17);
             l.insertSorted(78);
