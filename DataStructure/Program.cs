@@ -1,4 +1,6 @@
-﻿namespace LearnDSAlgorithm
+﻿using System.ComponentModel;
+
+namespace LearnDSAlgorithm
 {
     //Lab Creating and Displaying Linked List
     public class Node
@@ -154,7 +156,58 @@
             }
             size = size + 1;
         }
-        #endregion 
+        #endregion
+
+        #region Search Element of linked list
+        public int search(int key)
+        {
+            Node p = head;
+           int index = 0;
+            while (p!=null)
+            {
+                if (p.element==key)
+                {
+                    return index;
+                }
+                p = p.next;
+                index = index + 1;
+            }
+            return -1;
+        }
+        #endregion
+
+        #region Insert Element at sorted order
+        public void insertSorted(int e)
+        {
+            Node newest = new Node(e, null);
+            if (isEmpty())
+            {
+                head = newest;
+            }
+            else
+            {
+                Node p = head;
+                Node q = head;
+                while (p!=null && p.element < e)
+                {
+                    q = p;
+                    p = p.next;
+                }
+                if (p==head)
+                {
+                    newest.next = head;
+                    head = newest;
+                }
+                else
+                {
+                    newest.next = q.next;
+                    q.next = newest;
+                }
+            }
+            size = size + 1;
+        }
+        #endregion
+
         public void display()
         {
             Node p = head;
@@ -168,6 +221,7 @@
         public static void Main()
         {
             LinkedList l = new LinkedList();
+            //insert element at last
             l.addLast(7);
             l.addLast(4);
             l.addLast(12);
@@ -177,12 +231,14 @@
             l.addLast(3);
             l.display();
             Console.WriteLine("Size:" + l.length());
+            //insert element at first
             l.addFirst(15);
             l.display();
             Console.WriteLine("Size:" + l.length());
             l.addFirst(25);
             l.display();
             Console.WriteLine("Size:" + l.length());
+            //insert element at anywhere
             l.AddAny(20, 3);
             l.display();
             Console.WriteLine("Size:" + l.length());
@@ -202,6 +258,15 @@
             //remove at any element
             int element2 = l.RemoveAnyNode(3);
             Console.WriteLine("Removed Element:" + element2);
+            l.display();
+            Console.WriteLine("Size:" + l.length());
+            //search element
+            int position = l.search(12);
+            Console.WriteLine("Result:" + position);
+            //insert element at sorted method
+            l.insertSorted(7);
+            l.insertSorted(17);
+            l.insertSorted(78);
             l.display();
             Console.WriteLine("Size:" + l.length());
             Console.ReadKey();
