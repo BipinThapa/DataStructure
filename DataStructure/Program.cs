@@ -2,23 +2,23 @@
 
 namespace DSAAlgorithm
 {
-    //Lab Head Recursion
+    //Lab Tail Recursion
     public class Recursion
     {
         public void CalculateRecursiveValue(int n)
         {
             if (n>0)
             {
-                CalculateRecursiveValue(n - 1);
                 int k = n * n;
                 Console.WriteLine(k);
+                CalculateRecursiveValue(n - 1);
             }
         }
         public static void Main()
         {
             Recursion r = new Recursion();
 
-            Console.WriteLine("Demo of Head Recursive function");
+            Console.WriteLine("Demo of Tail Recursive function");
             r.CalculateRecursiveValue(4);
             Console.ReadKey();
         }
@@ -27,9 +27,9 @@ namespace DSAAlgorithm
 
 /*
    Output:
-   Demo of Head Recursive function
-   1
-   4
-   9
-   16
+    Demo of Tail Recursive function
+    16
+    9
+    4
+    1
 */
