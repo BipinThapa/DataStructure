@@ -7,16 +7,17 @@ namespace DSAlgorithms
 {
     class Sort
     {
-        public void selectionsort(int[] A, int n)
+        public void insertionsort(int[] A, int n)
         {
-            for (int i = 0; i < n - 1; i++)
+            for (int i = 1; i < n; i++)
             {
-                int position = i;
-                for (int j = i + 1; j < n; j++)
-                    if (A[j] < A[position])
-                        position = j;
                 int temp = A[i];
-                A[i] = A[position];
+                int position = i;
+                while (position > 0 && A[position - 1] > temp)
+                {
+                    A[position] = A[position - 1];
+                    position = position - 1;
+                }
                 A[position] = temp;
             }
         }
@@ -34,8 +35,8 @@ namespace DSAlgorithms
             int[] A = { 3, 5, 8, 9, 6, 2 };
             Console.WriteLine("Original Array: ");
             s.display(A, 6);
-            s.selectionsort(A, 6);
-            Console.WriteLine("Sorted Array");
+            s.insertionsort(A, 6);
+            Console.WriteLine("Sorted Array:");
             s.display(A, 6);
             Console.ReadKey();
         }
