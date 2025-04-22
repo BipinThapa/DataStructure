@@ -35,7 +35,7 @@ namespace DSAlgorithms
         static void Main(string[] args)
         {
             Sort s = new Sort();
-            int[] A = { 3, 5, 8, 9, 6, 2 };
+            int[] A = { 10, 5, 8, 9, 6, 2 };
             Console.WriteLine("Original Array: ");
             s.display(A, 6);
             s.shellsort(A, 6);
