@@ -7,18 +7,19 @@ namespace DSAlgorithms
 {
     class Sort
     {
-        public void insertionsort(int[] A, int n)
+        public void bubblesort(int[] A, int n)
         {
-            for (int i = 1; i < n; i++)
+            for (int pass = n - 1; pass >= 0; pass--)
             {
-                int temp = A[i];
-                int position = i;
-                while (position > 0 && A[position - 1] > temp)
+                for (int i = 0; i < pass; i++)
                 {
-                    A[position] = A[position - 1];
-                    position = position - 1;
+                    if (A[i] > A[i + 1])
+                    {
+                        int temp = A[i];
+                        A[i] = A[i + 1];
+                        A[i + 1] = temp;
+                    }
                 }
-                A[position] = temp;
             }
         }
 
@@ -33,10 +34,10 @@ namespace DSAlgorithms
         {
             Sort s = new Sort();
             int[] A = { 3, 5, 8, 9, 6, 2 };
-            Console.WriteLine("Original Array: ");
+            Console.WriteLine("Original Array:");
             s.display(A, 6);
-            s.insertionsort(A, 6);
-            Console.WriteLine("Sorted Array:");
+            s.bubblesort(A, 6);
+            Console.WriteLine("Sorted Array: ");
             s.display(A, 6);
             Console.ReadKey();
         }
