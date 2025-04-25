@@ -7,40 +7,51 @@ namespace DSAlgorithms
 {
     class Sort
     {
-        public void quicksort(int[] A, int low, int high)
+        public void mergesort(int[] A, int left, int right)
         {
-            if (low < high)
+            if (left < right)
             {
-                int pi = partition(A, low, high);
-                quicksort(A, low, pi - 1);
-                quicksort(A, pi + 1, high);
+                int mid = (left + right) / 2;
+                mergesort(A, left, mid);
+                mergesort(A, mid + 1, right);
+                merge(A, left, mid, right);
             }
         }
 
-        public int partition(int[] A, int low, int high)
+        public void merge(int[] A, int left, int mid, int right)
         {
-            int pivot = A[low];
-            int i = low + 1;
-            int j = high;
-            do
+            int i = left;
+            int j = mid + 1;
+            int k = left;
+            int[] B = new int[right + 1];
+            while (i <= mid && j <= right)
             {
-                while (i <= j && A[i] <= pivot)
+                if (A[i] < A[j])
+                {
+                    B[k] = A[i];
                     i = i + 1;
-                while (i <= j && A[j] > pivot)
-                    j = j - 1;
-                if (i <= j)
-                    swap(A, i, j);
-
-            } while (i < j);
-            swap(A, low, j);
-            return j;
-        }
-
-        public void swap(int[] A, int i, int j)
-        {
-            int temp = A[i];
-            A[i] = A[j];
-            A[j] = temp;
+                }
+                else
+                {
+                    B[k] = A[j];
+                    j = j + 1;
+                }
+                k = k + 1;
+            }
+            while (i <= mid)
+            {
+                B[k] = A[i];
+                i = i + 1;
+                k = k + 1;
+            }
+            while (j <= right)
+            {
+                B[k] = A[j];
+                j = j + 1;
+                k = k + 1;
+            }
+            for (int x = left; x < right + 1; x++)
+                A[x] = B[x];
         }
 
         public void display(int[] A, int n)
@@ -56,7 +67,7 @@ namespace DSAlgorithms
             int[] A = { 3, 5, 8, 9, 6, 2 };
             Console.WriteLine("Original Array: ");
             s.display(A, 6);
-            s.quicksort(A, 0, 5);
+            s.mergesort(A, 0, 5);
             Console.WriteLine("Sorted Array: ");
             s.display(A, 6);
             Console.ReadKey();
