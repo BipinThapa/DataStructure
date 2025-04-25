@@ -3,26 +3,55 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace DSAlgorithms
+namespace LearnDSAlgorithms
 {
     class Sort
     {
-        public void shellsort(int[] A, int n)
+        public void mergesort(int[] A, int left, int right)
         {
-            for (int gap = n/2; gap > 0; gap=gap/2)
+            if (left < right)
             {
-                for (int i = gap; i < n; i++)
-                {
-                    int gvalue = A[i];
-                    int j = i - gap;
-                    while (j >= 0 && A[j] > gvalue)
-                    {
-                        A[j + gap] = A[j];
-                        j = j - gap;
-                    }
-                    A[j + gap] = gvalue;
-                }
+                int mid = (left + right) / 2;
+                mergesort(A, left, mid);
+                mergesort(A, mid + 1, right);
+                merge(A, left, mid, right);
             }
+        }
+
+        public void merge(int[] A, int left, int mid, int right)
+        {
+            int i = left;
+            int j = mid + 1;
+            int k = left;
+            int[] B = new int[right + 1];
+            while (i <= mid && j <= right)
+            {
+                if (A[i] < A[j])
+                {
+                    B[k] = A[i];
+                    i = i + 1;
+                }
+                else
+                {
+                    B[k] = A[j];
+                    j = j + 1;
+                }
+                k = k + 1;
+            }
+            while (i <= mid)
+            {
+                B[k] = A[i];
+                i = i + 1;
+                k = k + 1;
+            }
+            while (j <= right)
+            {
+                B[k] = A[j];
+                j = j + 1;
+                k = k + 1;
+            }
+            for (int x = left; x < right + 1; x++)
+                A[x] = B[x];
         }
 
         public void display(int[] A, int n)
@@ -35,35 +64,13 @@ namespace DSAlgorithms
         static void Main(string[] args)
         {
             Sort s = new Sort();
-            int[] A = { 10, 5, 8, 9, 6, 2 };
+            int[] A = { 3, 5, 8, 9 };
             Console.WriteLine("Original Array: ");
-            s.display(A, 6);
-            s.shellsort(A, 6);
-            Console.WriteLine("Sorted Array:");
-            s.display(A, 6);
+            s.display(A, 4);
+            s.mergesort(A, 0, 3);
+            Console.WriteLine("Sorted Array: ");
+            s.display(A, 4);
             Console.ReadKey();
         }
     }
 }
-
-
-/*
-  int gap = n / 2;
-            while (gap > 0)
-            {
-                int i = gap;
-                while (i < n)
-                {
-                    int temp = A[i];
-                    int j = i - gap;
-                    while (j >= 0 && A[j] > temp)
-                    {
-                        A[j + gap] = A[j];
-                        j = j - gap;
-                    }
-                    A[j + gap] = temp;
-                    i = i + 1;
-                }
-                gap = gap / 2;
-            }
- */
