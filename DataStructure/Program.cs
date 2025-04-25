@@ -7,51 +7,40 @@ namespace DSAlgorithms
 {
     class Sort
     {
-        public void mergesort(int[] A, int left, int right)
+        public void quicksort(int[] A, int low, int high)
         {
-            if (left < right)
+            if (low < high)
             {
-                int mid = (left + right) / 2;
-                mergesort(A, left, mid);
-                mergesort(A, mid + 1, right);
-                merge(A, left, mid, right);
+                int pi = partition(A, low, high);
+                quicksort(A, low, pi - 1);
+                quicksort(A, pi + 1, high);
             }
         }
 
-        public void merge(int[] A, int left, int mid, int right)
+        public int partition(int[] A, int low, int high)
         {
-            int i = left;
-            int j = mid + 1;
-            int k = left;
-            int[] B = new int[right + 1];
-            while (i <= mid && j <= right)
+            int pivot = A[low];
+            int i = low + 1;
+            int j = high;
+            do
             {
-                if (A[i] < A[j])
-                {
-                    B[k] = A[i];
+                while (i <= j && A[i] <= pivot)
                     i = i + 1;
-                }
-                else
-                {
-                    B[k] = A[j];
-                    j = j + 1;
-                }
-                k = k + 1;
-            }
-            while (i <= mid)
-            {
-                B[k] = A[i];
-                i = i + 1;
-                k = k + 1;
-            }
-            while (j <= right)
-            {
-                B[k] = A[j];
-                j = j + 1;
-                k = k + 1;
-            }
-            for (int x = left; x < right + 1; x++)
-                A[x] = B[x];
+                while (i <= j && A[j] > pivot)
+                    j = j - 1;
+                if (i <= j)
+                    swap(A, i, j);
+
+            } while (i < j);
+            swap(A, low, j);
+            return j;
+        }
+
+        public void swap(int[] A, int i, int j)
+        {
+            int temp = A[i];
+            A[i] = A[j];
+            A[j] = temp;
         }
 
         public void display(int[] A, int n)
@@ -67,7 +56,7 @@ namespace DSAlgorithms
             int[] A = { 3, 5, 8, 9, 6, 2 };
             Console.WriteLine("Original Array: ");
             s.display(A, 6);
-            s.mergesort(A, 0, 5);
+            s.quicksort(A, 0, 5);
             Console.WriteLine("Sorted Array: ");
             s.display(A, 6);
             Console.ReadKey();
